@@ -19,12 +19,16 @@ import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
-import com.appdynamics.eumagent.runtime.InfoPoint;
 import com.appdynamics.demo.android.ECommerce.R;
 import com.appdynamics.demo.android.misc.GlobalDataProvider;
 import com.appdynamics.demo.android.model.Item;
 import com.appdynamics.demo.android.service.http.DeleteRequestService;
 import com.appdynamics.demo.android.service.http.GetRequestService;
+
+import com.appdynamics.eumagent.runtime.CallTracker;
+import com.appdynamics.eumagent.runtime.Instrumentation;
+import com.appdynamics.eumagent.runtime.InfoPoint;
+import static com.appdynamics.eumagent.runtime.BreadcrumbVisibility.CRASHES_AND_SESSIONS;
 
 public class CartFragment extends ListFragment {
     private static final String TAG = CartFragment.class.getName();
@@ -65,6 +69,7 @@ public class CartFragment extends ListFragment {
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
+		Instrumentation.leaveBreadcrumb("View Cart", CRASHES_AND_SESSIONS);
 		super.onCreate(savedInstanceState);
 
 		setListAdapter(new ArrayAdapter<Item>(getActivity(),
@@ -219,14 +224,30 @@ public class CartFragment extends ListFragment {
 	}
 
 	public void checkoutCart(){
+		// Wei added:
+		Instrumentation.startTimer("Time Spent on checkoutCart");
+		CallTracker tracker =
+				Instrumentation.beginCall("com.appdynamics.demo.android.CartFragment", "checkoutCart");
         Log.d(TAG, "checkoutCart(): currentCartItems size = " + currentCartItems.size());
 		if (currentCartItems!=null && currentCartItems.size()>0){
+			// Wei added:
+			//InfoPoint.infoPointMethod("CartItemsCount", currentCartItems.size());
+			Instrumentation.reportMetric("Checkout Count", currentCartItems.size());
 			CheckoutTask checkoutReq = new CheckoutTask();
 			checkoutReq.execute(getEndpoint() + "cart/co");
 			currentCartItemsMap.clear();
 			convertItemsMaptoList();
 		} else {
 			displayToast("There are no items in the cart");
+		}
+		// Wei added:
+		Instrumentation.stopTimer("Time Spent on checkoutCart");
+		Instrumentation.leaveBreadcrumb("Checkout", CRASHES_AND_SESSIONS);
+		try {
+			tracker.reportCallEnded();
+		} catch(Exception e) {
+			//handle exception thrown
+			tracker.reportCallEndedWithException(e);
 		}
 	}
 

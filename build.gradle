@@ -1,24 +1,27 @@
 buildscript {
     repositories {
         jcenter()
+        google()
         //Uncomment to use local file-based adeum-maven-repo, e.g.
         //maven { url 'file:///Users/mark.prichard/APPDYNAMICS/ECommerce-Android/adeum-maven-repo' }
+        maven { url 'https://maven.google.com' }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:2.3.1'
+        classpath 'com.android.tools.build:gradle:4.0.1'
 
         //Uncomment to use local file-based adeum-maven-repo (version should be 2.0)
         //classpath 'com.appdynamics:appdynamics-gradle-plugin:2.0'
 
         //Uncomment to use GA plugin from jcenter (choose version)
-        classpath 'com.appdynamics:appdynamics-gradle-plugin:4.2.2.0'
+        classpath 'com.appdynamics:appdynamics-gradle-plugin:20.7.1'
     }
 }
 
 allprojects {
     repositories {
         jcenter()
+        google()
         //Uncomment to use local file-based adeum-maven-repo, e.g.
-        //maven { url 'file:///Users/mark.prichard/APPDYNAMICS/ECommerce-Android/adeum-maven-repo' }
+        maven { url 'https://maven.google.com' }
     }
 }

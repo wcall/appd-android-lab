@@ -1,5 +1,8 @@
 package com.appdynamics.demo.android;
 
+import com.appdynamics.eumagent.runtime.AgentConfiguration;
+import com.appdynamics.eumagent.runtime.Instrumentation;
+
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -17,10 +20,30 @@ public class EntryActivity extends  Activity implements AsyncTaskListener {
 	    {
             super.onCreate(savedInstanceState);
 
+            // Wei added:
+			AgentConfiguration config;
+			config = AgentConfiguration.builder()
+					.withAppKey("EUM-AAB-AUA") // or use PreferenceConstants.EUM_APP_KEY
+					.withContext(getApplicationContext())
+					.withLoggingLevel(Instrumentation.LOGGING_LEVEL_VERBOSE)
+					.withCollectorURL("http://wcallmrumcertlevel1lab-1qflbwue.appd-sales.com:7001")
+					.withCompileTimeInstrumentationCheck(true)
+					.withScreenshotsEnabled(true)
+//                        .withAutoInstrument(true)
+//                    .withApplicationName("com.example.android.xxxxxxxx")
+					.withScreenshotURL("http://wcallmrumcertlevel1lab-1qflbwue.appd-sales.com:7001")
+//                    .withExcludedUrlPatterns(excludedURLPatterns)
+					.build();
+
+			Instrumentation.start(config);
+
 	      //See if the user credentials are already stored in the system
 			SharedPreferences settings = getSharedPreferences(Constants.COMMON_PREFS_FILE_NAME,
                     Context.MODE_PRIVATE);
             String mUser = settings.getString("username",null);
+
+            // Wei added:
+			Instrumentation.setUserData("userID", mUser);
 
 		       if (mUser==null || mUser.trim().equals("")) {
 		    	   showLogin();

@@ -15,6 +15,9 @@ import com.appdynamics.demo.android.misc.Constants;
 import com.appdynamics.demo.android.misc.UserPrefActivity;
 import com.appdynamics.demo.android.model.Item;
 import com.appdynamics.demo.android.tabs.CustomTabListener;
+import com.appdynamics.eumagent.runtime.Instrumentation;
+
+import static com.appdynamics.eumagent.runtime.BreadcrumbVisibility.CRASHES_AND_SESSIONS;
 
 /**
  * Unfortunately the two pane mode does not work because we are using
@@ -103,6 +106,7 @@ public class ItemListActivity extends FragmentActivity implements
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
+		Instrumentation.leaveBreadcrumb("Add to Cart", CRASHES_AND_SESSIONS);
 	    // Handle presses on the action bar items
 	    switch (item.getItemId()) {
 	        case R.id.action_settings:

@@ -25,6 +25,9 @@ import com.appdynamics.demo.android.misc.Constants;
 import com.appdynamics.demo.android.misc.GlobalDataProvider;
 import com.appdynamics.demo.android.misc.UserLoginTask;
 import com.appdynamics.demo.android.misc.UserPrefActivity;
+import com.appdynamics.eumagent.runtime.Instrumentation;
+
+import static com.appdynamics.eumagent.runtime.BreadcrumbVisibility.CRASHES_AND_SESSIONS;
 
 /**
  * Activity which displays a login screen to the user, offering registration as
@@ -101,6 +104,7 @@ public class LoginActivity extends Activity implements AsyncTaskListener {
 	 * errors are presented and no actual login attempt is made.
 	 */
 	public void attemptLogin() {
+		Instrumentation.leaveBreadcrumb("Login", CRASHES_AND_SESSIONS);
 		if (mAuthTask != null) {
 			return;
 		}
