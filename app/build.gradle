@@ -40,8 +40,8 @@ dependencies {
 
 adeum { // this section added for AppDynamics
     account {
-        name 'nossh-1594928918635'
-        licenseKey '5140e7f5-ad10-481f-a55b-db7ee48cfb0b'
+        name 'nossh-1602518327106'
+        licenseKey 'b0248ceb-c954-4a37-97b5-207e90418cb4'
     }
 
     proguardMappingFileUpload {

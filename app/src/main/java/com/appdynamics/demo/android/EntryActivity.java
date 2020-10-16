@@ -26,12 +26,12 @@ public class EntryActivity extends  Activity implements AsyncTaskListener {
 					.withAppKey("EUM-AAB-AUA") // or use PreferenceConstants.EUM_APP_KEY
 					.withContext(getApplicationContext())
 					.withLoggingLevel(Instrumentation.LOGGING_LEVEL_VERBOSE)
-					.withCollectorURL("http://wcallmrumcertlevel1lab-1qflbwue.appd-sales.com:7001")
+					.withCollectorURL("http://wcallmrumdeepdive-2010-avmubjfu.appd-sales.com:7001")
 					.withCompileTimeInstrumentationCheck(true)
 					.withScreenshotsEnabled(true)
 //                        .withAutoInstrument(true)
 //                    .withApplicationName("com.example.android.xxxxxxxx")
-					.withScreenshotURL("http://wcallmrumcertlevel1lab-1qflbwue.appd-sales.com:7001")
+					.withScreenshotURL("http://wcallmrumdeepdive-2010-avmubjfu.appd-sales.com:7001")
 //                    .withExcludedUrlPatterns(excludedURLPatterns)
 					.build();
 
